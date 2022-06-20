@@ -1,0 +1,26 @@
+- name: Update packages
+  dnf:
+    name: "*"
+    state: "latest"
+
+- name: install essential packages 1
+  package:
+    name:
+      - vim
+      - git
+      - neofetch
+      - htop
+      - tmux
+      - alacritty
+    state: "latest"
+
+- name: install core system utilities
+  become: true
+  package: 
+    name: 
+      - unzip
+      - curl
+      - lsof
+      - firefox
+      - xrandr
+    state: "latest"

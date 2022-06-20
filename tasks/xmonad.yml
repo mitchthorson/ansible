@@ -1,0 +1,6 @@
+- name: install xmonad
+  become: true
+  package:
+    - xmonad
+    - xmonad-contrib
+    - xmobar
