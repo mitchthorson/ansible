@@ -1,0 +1,5 @@
+- hosts: localhost
+  become: true
+  tasks:
+    - import_tasks: tasks/essential.yml
+    - import_tasks: tasks/neovim.yml

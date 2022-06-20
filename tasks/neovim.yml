@@ -1,0 +1,39 @@
+- name: install neovim build dependencies
+  become: true
+  package:
+    name:
+      - ninja-build
+      - libtool
+      - autoconf
+      - automake
+      - cmake
+      - gcc
+      - gcc-c++
+      - make
+      - pkgconfig
+      - unzip
+      - patch
+      - gettext
+      - curl
+    state: "latest"
+
+- name: get packer.nvim
+  ansible.builtin.git:
+    repo: "https://github.com/wbthomason/packer.nvim"
+    dest: "{{ lookup('env', 'HOME') }}/.local/share/nvim/site/pack/packer/start/packer.nvim"
+    depth: 1
+
+- name: clone neovim
+  ansible.builtin.git:
+    repo: "https://github.com/neovim/neovim.git"
+    dest: "{{ lookup('env', 'HOME') }}/dev/neovim"
+
+- name: checkout neovim stable
+  shell: "cd {{ lookup('env', 'HOME') }}/dev/neovim && git checkout stable"
+
+- name: build neovim
+  shell: "cd {{ lookup('env', 'HOME')}}/dev/neovim && make CMAKE_BUILD_TYPE=Release"
+
+- name: install neovim
+  become: true
+  shell: "cd {{ lookup('env', 'HOME')}}/dev/neovim && make install"

@@ -1,0 +1,15 @@
+- name: Update packages
+  dnf:
+    name: "*"
+    state: "latest"
+
+- name: Install essential packages
+  package:
+    name:
+      - vim
+      - git
+      - neofetch
+      - htop
+      - tmux
+      - alacritty
+    state: "latest"
