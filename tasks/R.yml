@@ -1,0 +1,9 @@
+- name: install r programming language
+  become: true
+  package:
+    name:
+      - R
+      - rstudio-desktop
+
+- name: install tidyverse
+  shell: 'R CMD INSTALL tidyverse'
