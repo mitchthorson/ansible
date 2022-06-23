@@ -1,5 +1,4 @@
 - hosts: localhost
-  become: true
   tasks:
     - import_tasks: tasks/core.yml
     - import_tasks: tasks/neovim.yml

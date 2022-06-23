@@ -1,9 +1,11 @@
 - name: Update packages
+  become: true
   dnf:
     name: "*"
     state: "latest"
 
-- name: install essential packages 1
+- name: install core system utilities
+  become: true
   package:
     name:
       - vim
@@ -12,15 +14,18 @@
       - htop
       - tmux
       - alacritty
-    state: "latest"
-
-- name: install core system utilities
-  become: true
-  package: 
-    name: 
       - unzip
       - curl
       - lsof
-      - firefox
       - xrandr
+      - nitrogen
+      - dunst
+    state: "latest"
+
+- name: install useful applications
+  become: true
+  package: 
+    name: 
+      - firefox
+      - nautilus
     state: "latest"
