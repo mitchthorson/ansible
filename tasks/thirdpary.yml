@@ -1,0 +1,27 @@
+- name: install rpm fusion repository
+  become: true
+  dnf:
+    name: "https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ansible_distribution_major_version}}.noarch.rpm"
+    state: present
+
+- name: install rpm fusion non-free repository
+  become: true
+  dnf:
+    name: "https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{ansible_distribution_major_version}}.noarch.rpm"
+    state: present
+
+- name: install third party packages
+  become: true
+  package:
+    name:
+      - discord
+      - slack
+
+- name: install lpf-spotify-client
+  become: true
+  dnf:
+    name: lpf-spotify-client
+    state: present
+
+- name: install spotify
+  shell: "lpf update"
