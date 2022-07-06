@@ -18,3 +18,8 @@
       - zsh
       - fzf
     state: "latest"
+
+- name: set git configuration
+  tags: install
+  shell:  git config --global user.email "mitchell@mitchellthorson.com" && git config --global user.name "mitchthorson"
+
