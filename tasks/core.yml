@@ -23,3 +23,9 @@
   tags: install
   shell:  git config --global user.email "mitchell@mitchellthorson.com" && git config --global user.name "mitchthorson"
 
+- name: install emoji font
+  become: true
+  tags: install
+  package:
+    name:
+      - google-noto-emoji-color-fonts
