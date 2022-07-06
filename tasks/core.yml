@@ -15,13 +15,6 @@
       - xrandr
       - nitrogen
       - dunst
-    state: "latest"
-
-- name: install useful applications
-  become: true
-  tags: install
-  package: 
-    name: 
-      - firefox
-      - nautilus
+      - zsh
+      - fzf
     state: "latest"

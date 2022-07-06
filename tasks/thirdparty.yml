@@ -21,17 +21,3 @@
   package:
     name:
       - discord
-      - slack
-
-- name: install lpf-spotify-client
-  become: true
-  tags: 
-    - fedora
-  dnf:
-    name: lpf-spotify-client
-    state: present
-
-- name: install spotify
-  tags: 
-    - fedora
-  shell: "lpf update"

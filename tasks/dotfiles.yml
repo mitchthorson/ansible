@@ -18,4 +18,4 @@
 
 - name: stow dotfiles
   tags: dotfiles
-  shell: "cd {{lookup('env', 'HOME') }}/dotfiles && ./install --fedora"
+  shell: "cd {{lookup('env', 'HOME') }}/dotfiles && ./install --linux"
