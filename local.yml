@@ -1,6 +1,9 @@
 - hosts: localhost
+  vars:
+    sshkey: "{{ lookup('env', 'HOME')}}/.ssh/id_ed25519"
   tasks:
     - import_tasks: tasks/core.yml
+    - import_tasks: tasks/fonts.yml
     - import_tasks: tasks/neovim.yml
     - import_tasks: tasks/dotfiles.yml
     - import_tasks: tasks/R.yml

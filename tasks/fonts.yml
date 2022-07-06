@@ -1,0 +1,22 @@
+- name: install emoji font
+  become: true
+  tags: 
+    - install 
+    - fonts
+  package:
+    name:
+      - google-noto-emoji-color-fonts
+
+- name: clone nerd-fonts
+  tags: 
+    - install 
+    - fonts
+  ansible.builtin.git:
+    repo: "https://github.com/ryanoasis/nerd-fonts.git"
+    dest: "{{ lookup('env', 'HOME') }}/dev/nerd-fonts"
+
+- name: install BlexMono Nerd Font
+  tags: 
+    - install 
+    - fonts
+  shell: "cd {{ lookup('env', 'HOME')}}/dev/nerd-fonts && ./install.sh IBMPlexMono"
