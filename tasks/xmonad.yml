@@ -1,5 +1,6 @@
 - name: install xmonad
   become: true
+  tags: xmonad
   package:
     - xmonad
     - xmonad-contrib

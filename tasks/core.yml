@@ -1,11 +1,6 @@
-- name: Update packages
-  become: true
-  dnf:
-    name: "*"
-    state: "latest"
-
 - name: install core system utilities
   become: true
+  tags: install
   package:
     name:
       - vim
@@ -24,6 +19,7 @@
 
 - name: install useful applications
   become: true
+  tags: install
   package: 
     name: 
       - firefox

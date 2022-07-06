@@ -1,16 +1,21 @@
 - name: install stow
+  become: true
+  tags: dotfiles
   package: 
      name: stow
      state: present
 
 - name: clone dotfiles
+  tags: dotfiles
   ansible.builtin.git: 
-    repo: "git@github.com/mitchthorson/dotfiles"
+    repo: "https://github.com/mitchthorson/dotfiles"
     dest: "{{ lookup('env', 'HOME') }}/dotfiles"
     recursive: yes
-    update: yes
-    accept_hostkey: yes
-    version: master
+
+  # ansible.builtin.git:
+  #   repo: "https://github.com/wbthomason/packer.nvim"
+  #   dest: "{{ lookup('env', 'HOME') }}/.local/share/nvim/site/pack/packer/start/packer.nvim"
 
 - name: stow dotfiles
+  tags: dotfiles
   shell: "cd {{lookup('env', 'HOME') }}/dotfiles && ./install --fedora"

@@ -5,5 +5,5 @@
       - R
       - rstudio-desktop
 
-- name: install tidyverse
-  shell: 'R CMD INSTALL tidyverse'
+- name: set cran mirror
+  shell: "touch {{ lookup('env', 'HOME') }}/.Rprofile && echo \"options(repos=structure(c(CRAN='http://cran.r-project.org')))\" >> {{ lookup('env', 'HOME') }}/.Rprofile"

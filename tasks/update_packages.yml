@@ -1,0 +1,6 @@
+- name: Update packages
+  become: true
+  tags: install
+  dnf:
+    name: "*"
+    state: "latest"
