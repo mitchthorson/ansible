@@ -13,11 +13,3 @@
   dnf:
     name: "https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{ansible_distribution_major_version}}.noarch.rpm"
     state: present
-
-- name: install third party packages
-  become: true
-  tags: 
-    - fedora
-  package:
-    name:
-      - discord
