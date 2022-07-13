@@ -21,6 +21,7 @@
       - fzf
       - dconf
       - ripgrep
+      - sqlite-devel
     state: "latest"
 
 - name: set git configuration

@@ -1,0 +1,10 @@
+- name: clone pyenv
+  tags: install
+  ansible.builtin.git: 
+    repo: "git@github.com:pyenv/pyenv.git"
+    dest: "{{ lookup('env', 'HOME') }}/.pyenv"
+    key_file: "{{ sshkey }}"
+
+- name: build pyenv
+  tags: install
+  shell: "cd {{ lookup('env', 'HOME') }}/.pyenv && src/configure && make -C src"

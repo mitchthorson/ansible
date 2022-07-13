@@ -10,3 +10,4 @@
     - import_tasks: tasks/node.yml
     - import_tasks: tasks/thirdparty.yml
     - import_tasks: tasks/i3.yml
+    - import_tasks: tasks/pyenv.yml
