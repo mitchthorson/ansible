@@ -19,10 +19,18 @@
       - lsof
       - zsh
       - fzf
-      - dconf
       - ripgrep
       - sqlite-devel
     state: "latest"
+
+- name: install gnome specific stuff
+  become: true
+  tags: install
+  package:
+    name:
+      - gnome-extensions-app
+      - gnome-tweaks
+      - dconf
 
 - name: set git configuration
   tags: install
