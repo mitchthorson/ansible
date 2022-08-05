@@ -1,0 +1,13 @@
+- name: install golang
+  become: true
+  tags: 
+    - install 
+    - go
+  package:
+    name:
+      - go
+    state: "latest"
+
+- name: setup golang dirs
+  tags: install go
+  shell: "mkdir -p {{ lookup('env', 'HOME') }}/go && mkdir -p {{ lookup('env', 'HOME') }}/go/bin"
