@@ -9,5 +9,7 @@
     state: "latest"
 
 - name: setup golang dirs
-  tags: install go
+  tags: 
+    - install 
+    - go
   shell: "mkdir -p {{ lookup('env', 'HOME') }}/go && mkdir -p {{ lookup('env', 'HOME') }}/go/bin"

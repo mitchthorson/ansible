@@ -1,10 +1,67 @@
+- name: check pyenv installed
+  tags: 
+    - install
+    - python
+  ansible.builtin.stat:
+      path: "{{ home }}/.pyenv/bin/pyenv"
+  register: pyenv_st
+
 - name: clone pyenv
-  tags: install
+  tags: 
+    - install
+    - python
   ansible.builtin.git: 
     repo: "git@github.com:pyenv/pyenv.git"
-    dest: "{{ lookup('env', 'HOME') }}/.pyenv"
+    dest: "{{ home }}/.pyenv"
     key_file: "{{ sshkey }}"
+  when: pyenv_st.stat.exists == False
+
+- name: python install dependencies
+  become: true
+  tags: 
+    - install
+    - python
+  package:
+    name:
+      - make 
+      - gcc 
+      - zlib-devel 
+      - bzip2 
+      - bzip2-devel 
+      - readline-devel 
+      - sqlite 
+      - sqlite-devel 
+      - openssl-devel 
+      - tk-devel 
+      - libffi-devel 
+      - xz-devel
+    state: "present"
 
 - name: build pyenv
-  tags: install
-  shell: "cd {{ lookup('env', 'HOME') }}/.pyenv && src/configure && make -C src"
+  tags: 
+    - install
+    - python
+  shell: "cd {{ home }}/.pyenv && src/configure && make -C src"
+  when: pyenv_st.stat.exists == False
+
+- name: install python with pyenv
+  tags: 
+    - install
+    - python
+  shell: "pyenv install {{ pythonversion }}"
+  when: pyenv_st.stat.exists == False
+
+- name: set default python version
+  tags: 
+    - install
+    - python
+  shell: "pyenv global {{ pythonversion }}"
+  when: pyenv_st.stat.exists == False
+
+- name: Install pipenv
+  tags: 
+    - install
+    - python
+  ansible.builtin.pip:
+    name: pipenv
+    extra_args: --user

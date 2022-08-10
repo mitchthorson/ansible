@@ -1,6 +1,8 @@
 - name: install i3 and packages
   become: true
-  tags: i3
+  tags: 
+    - install
+    - i3
   package:
     name:
       - xrandr

@@ -1,7 +1,26 @@
 - name: install nodejs
   become: true
+  tags: 
+    - install
+    - node
   package:
     name:
       - nodejs
+
 - name: install nvm
+  tags: 
+    - install
+    - node
   shell: curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+
+- name: install node lts with nvm
+  tags: 
+    - install
+    - node
+  shell: nvm install lts/*
+
+- name: set default nvm version
+  tags: 
+    - install
+    - node
+  shell: nvm alias default=lts/*
