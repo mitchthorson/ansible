@@ -1,9 +1,15 @@
 - name: install r programming language
   become: true
+  tags:
+    - install
+    - r
   package:
     name:
       - R
       - rstudio-desktop
 
 - name: set cran mirror
-  shell: "touch {{ lookup('env', 'HOME') }}/.Rprofile && echo \"options(repos=structure(c(CRAN='http://cran.r-project.org')))\" >> {{ lookup('env', 'HOME') }}/.Rprofile"
+  tags:
+    - install
+    - r
+  shell: "touch {{ lookup('env', 'HOME') }}/.Rprofile && echo \"\noptions(repos=structure(c(CRAN='http://cran.r-project.org')))\" >> {{ lookup('env', 'HOME') }}/.Rprofile"
