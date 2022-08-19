@@ -12,4 +12,29 @@
   tags: 
     - install 
     - go
-  shell: "mkdir -p {{ lookup('env', 'HOME') }}/go && mkdir -p {{ lookup('env', 'HOME') }}/go/bin"
+  shell: "mkdir -p {{ home }}/go && mkdir -p {{ home }}/go/bin"
+
+- name: check go-moon-phase installed
+  tags: 
+    - install
+    - go
+  ansible.builtin.stat:
+      path: "{{ home }}/go/bin/go-moon-phase"
+  register: moon_phase_st
+
+- name: download go-moon-phase
+  tags: 
+    - install 
+    - go
+  ansible.builtin.git: 
+    repo: "git@github.com:mitchthorson/go-moon-phase.git"
+    dest: "{{ home }}/dev/go-moon-phase"
+    key_file: "{{ sshkey }}"
+  when: moon_Phase_st.stat.exists == False
+
+- name: install go-moon-phase
+  tags: 
+    - install 
+    - go
+  ansible.builtin.shell: "cd {{ home }}/dev/go-moon-phase && go install"
+  when: moon_Phase_st.stat.exists == False
