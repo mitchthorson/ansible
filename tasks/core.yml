@@ -3,6 +3,12 @@
   tags: install
   shell: "echo '[main]\ngpgcheck=True\ninstallonly_limit=3\nclean_requirements_on_remove=True\nbest=False\nskip_if_unavailable=True\n\n# Added for speed:\nfastestmirror=True\nmax_parallel_downloads=10\ndefaultyes=True\nkeepcache=True' > /etc/dnf/dnf.conf"
 
+- name: install fedora dev tools
+  become: true
+  ansible.builtin.dnf:
+    name: "@Development tools"
+    state: present
+
 - name: install core system utilities
   become: true
   tags: install
@@ -21,6 +27,7 @@
       - fzf
       - ripgrep
       - sqlite-devel
+      - libstdc++-static
     state: "latest"
 
 - name: install gnome specific stuff

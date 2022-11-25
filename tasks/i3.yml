@@ -10,6 +10,11 @@
       - dunst
       - i3-gaps
       - rofi
+      - rofi-devel
       - polybar
       - picom
 
+# - name: clone rofi-emoji source
+#   tags:
+#     - install
+#     - i3
