@@ -12,4 +12,4 @@
   tags:
     - install
     - r
-  shell: "touch {{ lookup('env', 'HOME') }}/.Rprofile && echo \"\noptions(repos=structure(c(CRAN='http://cran.r-project.org')))\" >> {{ lookup('env', 'HOME') }}/.Rprofile"
+  shell: "touch {{ lookup('env', 'HOME') }}/.Rprofile && echo \"\noptions(repos=structure(c(CRAN='https://cran.r-project.org')))\" >> {{ lookup('env', 'HOME') }}/.Rprofile"
