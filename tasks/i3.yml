@@ -14,7 +14,19 @@
       - polybar
       - picom
 
-# - name: clone rofi-emoji source
-#   tags:
-#     - install
-#     - i3
+- name: clone rofi-emoji source
+  tags:
+    - install
+    - i3
+  ansible.builtin.git:
+    repo: "git@github.com:Mange/rofi-emoji.git"
+    dest: "{{ home }}/dev/rofi-emoji"
+    key_file: "{{ sshkey }}"
+    depth: 1
+
+- name: install rofi-emoji from source
+  tags:
+    - install
+    - i3
+  become: true
+  ansible.builtin.shell: "cd {{ home }}/dev/rofi-emoji && autoreconf -i && mkdir build && cd build && ../configure && make && make install"
