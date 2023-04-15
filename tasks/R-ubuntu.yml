@@ -1,0 +1,14 @@
+- name: install r programming language
+  become: true
+  tags:
+    - install
+    - r
+  package:
+    name:
+      - r-base
+
+- name: set cran mirror
+  tags:
+    - install
+    - r
+  shell: "touch {{ lookup('env', 'HOME') }}/.Rprofile && echo \"\noptions(repos=structure(c(CRAN='https://cran.r-project.org')))\" >> {{ lookup('env', 'HOME') }}/.Rprofile"

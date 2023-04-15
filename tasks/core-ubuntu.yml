@@ -1,0 +1,43 @@
+- name: install ubuntu dev tools
+  become: true
+  ansible.builtin.package:
+    name: build-essential
+    state: present
+
+- name: Add alacritty repository
+  become: true
+  ansible.builtin.apt_repository:
+    repo: ppa:aslatter/ppa
+
+- name: install core system utilities
+  become: true
+  tags: install
+  package:
+    name:
+      - vim
+      - git
+      - neofetch
+      - htop
+      - tmux
+      - alacritty
+      - unzip
+      - curl
+      - lsof
+      - zsh
+      - fzf
+      - ripgrep
+      - libsqlite3-dev
+    state: "latest"
+
+- name: install gnome specific stuff
+  become: true
+  tags: install
+  package:
+    name:
+      - gnome-extensions-app
+      - gnome-tweaks
+
+- name: set git configuration
+  tags: install
+  shell:  git config --global user.email "mitchell@mitchellthorson.com" && git config --global user.name "mitchthorson"
+
