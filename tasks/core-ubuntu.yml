@@ -4,11 +4,6 @@
     name: build-essential
     state: present
 
-- name: Add alacritty repository
-  become: true
-  ansible.builtin.apt_repository:
-    repo: ppa:aslatter/ppa
-
 - name: install core system utilities
   become: true
   tags: install

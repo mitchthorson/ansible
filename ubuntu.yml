@@ -5,7 +5,4 @@
     pythonversion: "3.10.5"
   tasks:
     - import_tasks: tasks/core-ubuntu.yml
-    - import_tasks: tasks/dotfiles.yml
-    - import_tasks: tasks/R-ubuntu.yml
-    - import_tasks: tasks/node.yml
-    - import_tasks: tasks/neovim-ubuntu.yml
+    - import_tasks: tasks/i3.yml
