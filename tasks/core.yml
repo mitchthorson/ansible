@@ -24,7 +24,6 @@
       - curl
       - lsof
       - zsh
-      - fzf
       - ripgrep
       - sqlite-devel
       - libstdc++-static

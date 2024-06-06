@@ -1,0 +1,9 @@
+- name: check if starship is installed
+  shell: command -v starship
+  register: starship_exists
+  ignore_errors: yes
+
+- name: Install starship
+  tags: install
+  when: starship_exists is failed
+  shell: cargo install starship --locked

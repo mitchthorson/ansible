@@ -7,10 +7,19 @@
      name: stow
      state: present
 
+- name: check dotfiles repo exists
+  tags: 
+    - install
+    - dotfiles
+  ansible.builtin.stat:
+      path: "{{ home }}/dotfiles/"
+  register: dotfiles_st
+
 - name: clone dotfiles
   tags: 
     - install
     - dotfiles
+  when: dotfiles_st.stat.isdir == False
   ansible.builtin.git: 
     repo: "git@github.com:mitchthorson/dotfiles.git"
     dest: "{{ lookup('env', 'HOME') }}/dotfiles"
@@ -20,4 +29,5 @@
   tags: 
     - install
     - dotfiles
+  when: dotfiles_st.stat.isdir == False
   shell: "cd {{lookup('env', 'HOME') }}/dotfiles && ./install --linux"

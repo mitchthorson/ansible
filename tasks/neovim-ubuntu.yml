@@ -9,23 +9,35 @@
       - gettext
     state: "latest"
 
+- name: check neovim repo exists
+  tags: 
+    - install
+    - neovim
+  ansible.builtin.stat:
+      path: "{{ repos }}/neovim/"
+  register: neovim_st
+
 - name: clone neovim
   tags: neovim
+  when: neovim_st.stat.isdir == False
   ansible.builtin.git:
     repo: "https://github.com/neovim/neovim.git"
     dest: "{{ repos }}/neovim"
     force: true
 
-- name: checkout neovim nightly
+- name: checkout neovim stable
   tags: neovim
-  shell: "cd {{ repos }}/neovim && git checkout nightly"
+  when: neovim_st.stat.isdir == False
+  shell: "cd {{ repos }}/neovim && git checkout stable"
 
 - name: build neovim
   tags: neovim
+  when: neovim_st.stat.isdir == False
   shell: "cd {{ repos }}/neovim && make distclean && make CMAKE_BUILD_TYPE=Release"
 
 - name: install neovim
   tags: neovim
   become: true
+  when: neovim_st.stat.isdir == False
   shell: "cd {{ repos }}/neovim && make install"
 

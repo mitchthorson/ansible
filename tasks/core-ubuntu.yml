@@ -24,7 +24,6 @@
       - curl
       - lsof
       - zsh
-      - fzf
       - ripgrep
       - sqlite3
       - libsqlite3-dev
@@ -51,3 +50,20 @@
   tags: install
   shell:  git config --global user.email "mitchell@mitchellthorson.com" && git config --global user.name "mitchthorson" && git config --global pull.rebase true
 
+- name: clone fzf source
+  tags: install
+  ansible.builtin.git:
+    repo: "git@github.com:junegunn/fzf.git"
+    dest: "{{ repos }}/fzf"
+
+- name: install fzf
+  tags: install
+  ansible.builtin.expect:
+    command: "{{repos}}/fzf/install"
+    responses: 
+      "Do you want to enable fuzzy auto-completion?":
+        - "y"
+      "Do you want to enable key bindings?":
+        - "y"
+      "Do you want to update your shell configuration files?":
+        - "y"

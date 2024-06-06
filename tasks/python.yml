@@ -24,16 +24,13 @@
     name:
       - make 
       - gcc 
-      - zlib-devel 
+      - zlib1g-dev
       - bzip2 
-      - bzip2-devel 
-      - readline-devel 
-      - sqlite 
-      - sqlite-devel 
-      - openssl-devel 
-      - tk-devel 
-      - libffi-devel 
-      - xz-devel
+      - libbz2-dev
+      - libssl-dev
+      - tk-dev
+      - libffi-dev
+      - xz-utils
     state: "present"
 
 - name: build pyenv
@@ -43,24 +40,35 @@
   shell: "cd {{ home }}/.pyenv && src/configure && make -C src"
   when: pyenv_st.stat.exists == False
 
+- name: check pyenv python installed
+  tags: 
+    - install
+    - python
+  ansible.builtin.stat:
+      path: "{{ home }}/.pyenv/versions/{{ pythonversion }}"
+  register: pyenv_python_st
+
 - name: install python with pyenv
   tags: 
     - install
     - python
   shell: "pyenv install {{ pythonversion }}"
-  when: pyenv_st.stat.exists == False
+  when: pyenv_python_st.stat.exists == False
 
 - name: set default python version
   tags: 
     - install
     - python
   shell: "pyenv global {{ pythonversion }}"
-  when: pyenv_st.stat.exists == False
+
+- name: Install pipx
+  tags: 
+    - install
+    - python
+  shell: "pip install pipx --user"
 
 - name: Install pipenv
   tags: 
     - install
     - python
-  ansible.builtin.pip:
-    name: pipenv
-    extra_args: --user
+  shell: "pipx ensurepath && pipx install pipenv"
