@@ -18,18 +18,11 @@
       - curl
     state: "latest"
 
-- name: get packer.nvim
-  tags: neovim
-  ansible.builtin.git:
-    repo: "https://github.com/wbthomason/packer.nvim"
-    dest: "{{ home }}/.local/share/nvim/site/pack/packer/start/packer.nvim"
-    depth: 1
-
 - name: clone neovim
   tags: neovim
   ansible.builtin.git:
     repo: "https://github.com/neovim/neovim.git"
-    dest: "{{ home }}/dev/neovim"
+    dest: "{{ home }}/repos/neovim"
     force: true
 
 - name: checkout neovim nightly
@@ -44,25 +37,4 @@
   tags: neovim
   become: true
   shell: "cd {{ home }}/dev/neovim && make install"
-
-- name: clone lua language server
-  tags:
-    - neovim
-    - lua
-  ansible.builtin.git:
-    repo: "https://github.com/sumneko/lua-language-server"
-    dest: "{{ home }}/lua-language-server"
-    depth: 1
-
-- name: lua language submodules
-  tags:
-    - neovim
-    - lua
-  shell: "cd {{ home }}/lua-language-server && git submodule update --depth 1 --init --recursive"
-
-- name: install lua lsp
-  tags:
-    - neovim
-    - lua
-  shell: "cd {{ home }}/lua-language-server/3rd/luamake && ./compile/install.sh && cd {{ home }}/lua-language-server && ./3rd/luamake/luamake rebuild"
 

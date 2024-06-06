@@ -5,12 +5,10 @@
     - i3
   package:
     name:
-      - xrandr
       - nitrogen
       - dunst
-      - i3-gaps
+      - i3
       - rofi
-      - rofi-devel
       - polybar
       - picom
 
@@ -20,8 +18,7 @@
     - i3
   ansible.builtin.git:
     repo: "git@github.com:Mange/rofi-emoji.git"
-    dest: "{{ home }}/dev/rofi-emoji"
-    key_file: "{{ sshkey }}"
+    dest: "{{ home }}/repos/rofi-emoji"
     depth: 1
 
 - name: install rofi-emoji from source
@@ -29,4 +26,4 @@
     - install
     - i3
   become: true
-  ansible.builtin.shell: "cd {{ home }}/dev/rofi-emoji && autoreconf -i && mkdir build && cd build && ../configure && make && make install"
+  ansible.builtin.shell: "cd {{ home }}/repos/rofi-emoji && autoreconf -i && mkdir build && cd build && ../configure && make && make install"
