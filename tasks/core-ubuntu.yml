@@ -26,7 +26,17 @@
       - zsh
       - fzf
       - ripgrep
+      - sqlite3
       - libsqlite3-dev
+      - pkg-config
+      - autoconf
+      - rustc
+      - cargo
+      - clang
+      - libssl-dev
+      - libreadline-dev
+      - libncurses5-dev
+      - imagemagick
     state: "latest"
 
 - name: install gnome specific stuff
@@ -39,5 +49,5 @@
 
 - name: set git configuration
   tags: install
-  shell:  git config --global user.email "mitchell@mitchellthorson.com" && git config --global user.name "mitchthorson"
+  shell:  git config --global user.email "mitchell@mitchellthorson.com" && git config --global user.name "mitchthorson" && git config --global pull.rebase true
 

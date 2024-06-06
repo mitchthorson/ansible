@@ -2,6 +2,7 @@
   vars:
     sshkey: "{{ lookup('env', 'HOME')}}/.ssh/id_ed25519"
     home: "{{ lookup('env', 'HOME')}}"
+    repos: "{{ lookup('env', 'HOME')}}/repos"
     pythonversion: "3.10.5"
   tasks:
     - import_tasks: tasks/core-ubuntu.yml

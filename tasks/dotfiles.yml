@@ -15,7 +15,6 @@
     repo: "git@github.com:mitchthorson/dotfiles.git"
     dest: "{{ lookup('env', 'HOME') }}/dotfiles"
     recursive: yes
-    key_file: "{{ sshkey }}"
 
 - name: stow dotfiles
   tags: 

@@ -13,19 +13,19 @@
   tags: neovim
   ansible.builtin.git:
     repo: "https://github.com/neovim/neovim.git"
-    dest: "{{ home }}/dev/neovim"
+    dest: "{{ repos }}/neovim"
     force: true
 
 - name: checkout neovim nightly
   tags: neovim
-  shell: "cd {{ lookup('env', 'HOME') }}/dev/neovim && git checkout nightly"
+  shell: "cd {{ repos }}/neovim && git checkout nightly"
 
 - name: build neovim
   tags: neovim
-  shell: "cd {{ home }}/dev/neovim && make distclean && make CMAKE_BUILD_TYPE=Release"
+  shell: "cd {{ repos }}/neovim && make distclean && make CMAKE_BUILD_TYPE=Release"
 
 - name: install neovim
   tags: neovim
   become: true
-  shell: "cd {{ home }}/dev/neovim && make install"
+  shell: "cd {{ repos }}/neovim && make install"
 

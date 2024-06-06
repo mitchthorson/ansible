@@ -13,7 +13,6 @@
   ansible.builtin.git: 
     repo: "git@github.com:pyenv/pyenv.git"
     dest: "{{ home }}/.pyenv"
-    key_file: "{{ sshkey }}"
   when: pyenv_st.stat.exists == False
 
 - name: python install dependencies
@@ -64,12 +63,4 @@
     - python
   ansible.builtin.pip:
     name: pipenv
-    extra_args: --user
-
-- name: install yapf
-  tags: 
-    - install
-    - python
-  ansible.builtin.pip:
-    name: yapf
     extra_args: --user
