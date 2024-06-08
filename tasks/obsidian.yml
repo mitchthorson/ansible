@@ -1,0 +1,5 @@
+- name: Install obsidian
+  tags: 
+    - install
+    - ubuntu
+  shell: flatpak install -y flathub md.obsidian.Obsidian

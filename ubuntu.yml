@@ -1,6 +1,5 @@
 - hosts: localhost
   vars:
-    sshkey: "{{ lookup('env', 'HOME')}}/.ssh/id_ed25519"
     home: "{{ lookup('env', 'HOME')}}"
     repos: "{{ lookup('env', 'HOME')}}/repos"
     pythonversion: "3.10.5"
@@ -13,3 +12,4 @@
     - import_tasks: tasks/R-ubuntu.yml
     - import_tasks: tasks/python.yml
     - import_tasks: tasks/node.yml
+    - import_tasks: tasks/obsidian.yml
