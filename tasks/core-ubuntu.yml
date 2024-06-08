@@ -36,20 +36,29 @@
       - libreadline-dev
       - libncurses5-dev
       - imagemagick
-      - gnome-shell-extension-manager
+      - flatpak
     state: "latest"
 
 - name: install gnome specific stuff
   become: true
-  tags: install
+  tags: 
+    - install
+    - gnome
   package:
     name:
       - gnome-extensions-app
       - gnome-tweaks
+      - gnome-shell-extension-manager
+      - gnome-software-plugin-flatpak
 
 - name: set git configuration
   tags: install
   shell:  git config --global user.email "mitchell@mitchellthorson.com" && git config --global user.name "mitchthorson" && git config --global pull.rebase true
+
+- name: add flatpak repo
+  tags: 
+    - install
+  shell: "flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo"
 
 - name: clone fzf source
   tags: install
