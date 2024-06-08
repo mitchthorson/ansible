@@ -36,6 +36,7 @@
       - libreadline-dev
       - libncurses5-dev
       - imagemagick
+      - gnome-shell-extension-manager
     state: "latest"
 
 - name: install gnome specific stuff
